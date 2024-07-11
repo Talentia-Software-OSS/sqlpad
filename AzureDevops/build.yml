@@ -1,0 +1,28 @@
+trigger: none
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - main
+
+variables:
+- name: node_version
+  value: 18.x
+- name: version
+  value: '1.0.0'
+
+
+stages:
+- stage: 'lint'  
+  jobs:
+  - job: build_test
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: UseNode@1
+      inputs:
+        version: $(node_version)
+      - bash: yarn
+      - bash: (cd client && yarn)
+      - bash: (cd client && yarn)
+      - bash: yarn lint
