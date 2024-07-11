@@ -17,5 +17,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - run: (cd client && yarn)
-      - run: (cd client && yarn)
+      - run: (cd server && yarn)
       - run: yarn lint
