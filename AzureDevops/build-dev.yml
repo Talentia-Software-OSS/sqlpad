@@ -37,7 +37,7 @@ stages:
       displayName: 'Docker build'
       inputs:
         containerRegistry: '$(ContainerRegistryServiceName)'
-        repository: 'tool/querytool'
+        repository: 'oss/sqlpad'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'        
         buildContext: '$(Build.SourcesDirectory)'        
