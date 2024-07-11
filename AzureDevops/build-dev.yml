@@ -3,7 +3,7 @@ pr:
   autoCancel: true
   branches:
     include:
-      - main
+      - master
 
 variables:
 - group: QueryTool-Dev-D06-V1
