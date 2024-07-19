@@ -1,0 +1,43 @@
+pr: none
+trigger:  
+  branches:
+    include:
+      - master
+
+variables:
+- group: QueryTool-Prod-H01-V1
+- name: node_version
+  value: 18.x
+- name: version
+  value: '1.0.0'
+
+
+stages:
+- stage: 'lint'  
+  jobs:
+  - job: build_test
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: UseNode@1
+      inputs:
+        version: $(node_version)
+    - bash: yarn
+    - bash: (cd client && yarn)
+    - bash: (cd server && yarn)
+    - bash: yarn lint
+- stage: 'build'  
+  jobs:
+  - job: docker_dev
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: 'Docker build'
+      inputs:
+        containerRegistry: '$(ContainerRegistryServiceName)'
+        repository: 'oss/sqlpad'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'        
+        buildContext: '$(Build.SourcesDirectory)'        
+        tags: $(version)        
