@@ -8,7 +8,7 @@ pr:
 variables:
 - group: QueryTool-Dev-D06-V1
 - name: node_version
-  value: 20.x
+  value: 22.x
 - name: version
   value: '1.1.0'
 
