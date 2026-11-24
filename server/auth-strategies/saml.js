@@ -118,7 +118,8 @@ function enableSaml(config) {
           entryPoint: config.get('samlEntryPoint'),
           issuer: config.get('samlIssuer'),
           callbackUrl: config.get('samlCallbackUrl'),
-          cert: config.get('samlCert'),
+          // passport-saml v5 renamed `cert` to `idpCert` (required)
+          idpCert: config.get('samlCert'),
           authnContext: samlAuthContext,
           identifierFormat: null,
         },

@@ -1,6 +1,6 @@
 {
   "name": "sqlpad-project",
-  "version": "7.4.3",
+  "version": "7.5.7",
   "private": true,
   "devDependencies": {
     "husky": "^9.0.6",
@@ -23,5 +23,6 @@
   },
   "dependencies": {
     "react-select": "^5.8.0"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
