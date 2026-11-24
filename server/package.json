@@ -4,7 +4,7 @@
   "description": "Web app. Write SQL and visualize the results. Supports Postgres, MySQL, SQL Server, Crate, Vertica, SAP HANA, and BigQuery.",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=20.17"
   },
   "type": "module",
   "keywords": [
@@ -89,7 +89,7 @@
     "pg": "^8.7.3",
     "pino": "^9.3.2",
     "prettier": "^2.6.2",
-    "query-string": "^9.1.0",
+    "query-string": "^10.0.0",
     "redis": "^4.0.6",
     "rimraf": "^6.0.1",
     "sanitize-filename": "^1.6.3",
@@ -99,9 +99,9 @@
     "socksjs": "^0.5.0",
     "sql-formatter": "^2.3.3",
     "sql-limiter": "^3.0.0",
-    "sqlite3": "^5.0.8",
+    "sqlite3": "^6.0.1",
     "umzug": "^2.3.0",
-    "uuid": "^10.0.0",
+    "uuid": "^11.1.1",
     "vertica": "^0.5.5"
   },
   "main": "./app.js",

@@ -22,7 +22,9 @@ import serverDirname from '../server-dirname.cjs';
 
 // At the start of any test run, clean out the root artifacts directory
 before(function () {
-  rimrafSync(path.join(serverDirname, 'test/artifacts/*'), { glob: true });
+  rimrafSync(path.join(serverDirname, 'test/artifacts/*'), {
+    glob: { windowsPathsNoEscape: true },
+  });
 });
 
 class TestUtils {
@@ -137,7 +139,9 @@ class TestUtils {
   prepDbDir() {
     const dbPath = this.config.get('dbPath');
     mkdirp.sync(dbPath);
-    return rimrafSync(path.join(dbPath, '*'), { glob: true });
+    return rimrafSync(path.join(dbPath, '*'), {
+      glob: { windowsPathsNoEscape: true },
+    });
   }
 
   async initDbs() {
