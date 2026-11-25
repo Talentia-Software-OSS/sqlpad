@@ -1,7 +1,11 @@
 # Need to remote into this image and debug some flow? 
-# docker run -it --rm node:18-slim /bin/ash
-FROM node:18-slim AS build
+# docker run -it --rm node:22-bookworm-slim /bin/ash
+# Build and runtime stages MUST use the same Debian release (same glibc).
+FROM node:22-bookworm-slim AS build
 ARG ODBC_ENABLED=false
+# Compile native modules (sqlite3) against this image's glibc instead of
+# downloading upstream prebuilt binaries, which require a newer glibc (2.38+).
+ENV npm_config_build_from_source=true
 RUN apt-get update && apt-get install -y \
     python3 make g++ python3-dev  \
     && ( \
@@ -51,7 +55,7 @@ RUN npm run build --prefix client && \
 
 # Start another stage with a fresh node
 # Copy the server directory that has all the necessary node modules + front end build
-FROM node:18-slim as bundle
+FROM node:22-bookworm-slim AS bundle
 ARG ODBC_ENABLED=false
 
 # Create a directory for the hooks and optionaly install ODBC

@@ -7,9 +7,9 @@ trigger:
 variables:
 - group: QueryTool-Prod-H01-V1
 - name: node_version
-  value: 18.x
+  value: 22.x
 - name: version
-  value: '1.0.0'
+  value: '1.1.0'
 
 
 stages:

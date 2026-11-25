@@ -3,6 +3,20 @@ import LdapStrategy from 'passport-ldapauth';
 import appLog from '../lib/app-log.js';
 import ldapUtils from '../lib/ldap-utils.js';
 
+// ldapjs 2 rejects loggers that are not plain objects
+// (checks Object.prototype.toString === '[object Object]'),
+// and recent pino 9.x sets Symbol.toStringTag to 'Pino'.
+// Pass a plain-object adapter delegating to the app logger.
+const ldapLog = {
+  trace: (...args) => appLog.logger.trace(...args),
+  debug: (...args) => appLog.logger.debug(...args),
+  info: (...args) => appLog.logger.info(...args),
+  warn: (...args) => appLog.logger.warn(...args),
+  error: (...args) => appLog.logger.error(...args),
+  fatal: (...args) => appLog.logger.fatal(...args),
+  child: () => ldapLog,
+};
+
 async function enableLdap(config) {
   if (!config.get('ldapAuthEnabled')) {
     return;
@@ -52,7 +66,7 @@ async function enableLdap(config) {
           searchFilter: config.get('ldapSearchFilter'),
           groupSearchBase: config.get('ldapSearchBase'),
           groupSearchFilter: '(cn={{dn}})',
-          log: appLog.logger,
+          log: ldapLog,
         },
       },
       async function passportLdapStrategyHandler(req, profile, done) {

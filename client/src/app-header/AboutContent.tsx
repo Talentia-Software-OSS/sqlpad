@@ -23,7 +23,7 @@ function AboutContent({ version = '' }: Props) {
         }}
       >
         <a
-          href="http://getsqlpad.com/"
+          href="http://sqlpad.github.io/"
           target="_blank"
           rel="noopener noreferrer"
           style={LINK_STYLE}
